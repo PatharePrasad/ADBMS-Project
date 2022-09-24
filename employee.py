@@ -1,24 +1,19 @@
-from tkinter import*
-from tkinter import ttk
-from PIL import Image,ImageTk
+from tkinter import Label, Tk
 
 
-class Employee:
-    def __init__(self,root):
-          self.root=root
-          self.root.geometry("1530x790+0+0")
-          self.root.title('Employee Managament System')
-
-
-lbl_title=Label(self.root,text='EMPLOYEE MANAGEMENT SYSTEM',font=('times new roman',37,'bold'),fg='darkblue',bg='white')
-lbl_title.place(x=0,y=0,width=1530,height=50)
-
-
-
+class Employee(Tk):
+    def __init__(self):
+        super().__init__()
+        
+        # Configuring the main window!
+        self.title('Employee Management System')
+        self.geometry("1530x790+0+0")
+        
+        # Adding label 
+        self.label = Label(self, text="EMPLOYEE MANAGEMENT SYSTEM", font=('times new roman',37,'bold'),fg='darkblue',bg='white')
+        self.label.place(x=0,y=0,width=1530,height=50)
 
 
 if __name__=="__main__":
-    root=Tk()
-    obj=Employee(root)
-    root.mainloop()
-
+    app = Employee()
+    app.mainloop()
