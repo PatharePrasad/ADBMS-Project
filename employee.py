@@ -1,4 +1,4 @@
-from tkinter import Label, Tk
+from tkinter import RIDGE, Frame, Label, Tk
 
 
 class Employee(Tk):
@@ -17,3 +17,7 @@ class Employee(Tk):
 if __name__=="__main__":
     app = Employee()
     app.mainloop()
+
+#Adding Borders
+    img_frame=Frame(self.root,bd=2,relief=RIDGE,bg='white')
+    img_frame.place(x=0,y=50,width=1530,height=160)
