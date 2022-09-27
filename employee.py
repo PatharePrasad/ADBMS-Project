@@ -12,12 +12,15 @@ class Employee(Tk):
         # Adding label 
         self.label = Label(self, text="EMPLOYEE MANAGEMENT SYSTEM", font=('times new roman',37,'bold'),fg='darkblue',bg='white')
         self.label.place(x=0,y=0,width=1530,height=50)
+        #Adding Borders
+        img_frame=Frame(self,bd=2,relief=RIDGE,bg='white')
+        img_frame.place(x=0,y=50,width=1530,height=160)
 
 
 if __name__=="__main__":
     app = Employee()
     app.mainloop()
+    
 
-#Adding Borders
-    img_frame=Frame(self.root,bd=2,relief=RIDGE,bg='white')
-    img_frame.place(x=0,y=50,width=1530,height=160)
+
+    
