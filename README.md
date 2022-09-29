@@ -20,4 +20,4 @@ Steps:
 
     ```pip install pillow```
 
-- Now trying code.👍👍👍
+- Now try running code.👍👍👍
