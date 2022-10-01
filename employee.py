@@ -1,4 +1,5 @@
-from tkinter import RIDGE, W, Frame, Image, Label, Tk
+
+from tkinter import RIDGE, W, Frame, Image, Label, LabelFrame, Tk, font, ttk
 from PIL import Image, ImageTk
 class Employee(Tk):
     def __init__(self):
@@ -9,7 +10,7 @@ class Employee(Tk):
         self.geometry("1530x790+0+0")
         
         # Adding label 
-        self.label = Label(self, text="EMPLOYEE MANAGEMENT SYSTEM", font=('times new roman',37,'bold'),fg='darkblue',bg='white')
+        self.label = Label(self, text="EMPLOYEE MANAGEMENT SYSTEM", font=('times new roman',37,'bold'),fg='cyan',bg='white')
         self.label.place(x=0,y=0,width=1530,height=50)
 
         # Preparing Image
@@ -49,8 +50,70 @@ class Employee(Tk):
 
         #Main Frame
         Main_frame=Frame(self,bd=2,relief=RIDGE,bg='white')
-        Main_frame.place(x=10,y=210,width=1500,height=560)
+        Main_frame.place(x=10,y=220,width=1500,height=560)
+ 
+        #upper Frame
+        upper_frame=LabelFrame(Main_frame,bd=2,relief=RIDGE,bg='white', text='Employee Information',font=('times new roman',11,'bold'),fg='red')
+        upper_frame.place(x=10,y=10,width=1480,height=270)
 
+        # Labels and Entry fields
+        lbl_dep=Label(upper_frame,text='Department',font=('aerial',11,'bold'),bg='white')
+        lbl_dep.grid(row=0,column=0,padx=2,sticky=W)
+
+        combo_dep=ttk.Combobox(upper_frame,font=('aerial',12,'bold'),width=17,state='readonly')
+        combo_dep['value']=('Select Depamrtment', 'HR', 'Software Engineer', 'Manager', 'Team Leader', 'Data Scientist')
+        combo_dep.current(0)
+        combo_dep.grid(row=0,column=1,padx=2,pady=10,sticky=W)
+
+        lbl_dep=Label(upper_frame,text='Department',font=('aerial',11,'bold'),bg='white')
+        lbl_dep.grid(row=0,column=0,padx=2,sticky=W)
+        combo_dep=ttk.Combobox(upper_frame,font=("aerial",12,"bold"),width=17,state='readonly')
+        
+        #Name
+        lbl_Name=Label(upper_frame,font=("aerial",12,"bold"),text="Name:",bg="white")
+        lbl_Name.grid(row=0,column=2,sticky=W,padx=2,pady=7)
+
+        txt_name=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_name.grid(row=0,column=3,padx=2,pady=7)
+
+        # lbl_Designition
+        lbl_Designition=Label(upper_frame,font=("aerial",12,"bold"),text="Designition:",bg="white")
+        lbl_Designition.grid(row=1,column=0,sticky=W,padx=2,pady=7)
+
+        txt_Designition=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_Designition.grid(row=1,column=1,padx=2,pady=7)
+        
+        # Email
+        lbl_Email=Label(upper_frame,font=("aerial",12,"bold"),text="Email:",bg="white")
+        lbl_Email.grid(row=1,column=2,sticky=W,padx=2,pady=7)
+
+        txt_Email=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_Email.grid(row=1,column=3,padx=2,pady=7)
+
+        # Address
+        lbl_address=Label(upper_frame,font=("aerial",12,"bold"),text="Address:",bg="white")
+        lbl_address.grid(row=2,column=0,sticky=W,padx=2,pady=7)
+
+        txt_address=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_address.grid(row=2,column=1,padx=2,pady=7)
+
+        # Married
+        lbl_married_status=Label(upper_frame,text='Married Status',font=('aerial',12,'bold'),bg='white')
+        lbl_married_status.grid(row=2,column=2,padx=2,sticky=W)
+
+        combo_txt_married=ttk.Combobox(upper_frame,font=('aerial',12,'bold'),width=18,state='readonly')
+        combo_txt_married['value']=("Married", "Unmarried")
+        combo_txt_married.current(0)
+        combo_txt_married.grid(row=2,column=3,padx=2,pady=7,sticky=W)
+
+        lbl_dep=Label(upper_frame,text='Department',font=('aerial',11,'bold'),bg='white')
+        lbl_dep.grid(row=0,column=0,padx=2,sticky=W)
+        combo_dep=ttk.Combobox(upper_frame,font=("aerial",12,"bold"),width=17,state='readonly')
+
+        #down Frame
+        down_frame=LabelFrame(Main_frame,bd=2,relief=RIDGE,bg='white', text='Employee Information Table',font=('times new roman',11,'bold'),fg='red')
+        down_frame.place(x=10,y=280,width=1480,height=270)
+        
 if __name__=="__main__":
     app = Employee()
     app.mainloop()
