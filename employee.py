@@ -1,4 +1,5 @@
 
+from multiprocessing.sharedctypes import Value
 from tkinter import RIDGE, W, Button, Frame, Image, Label, LabelFrame, Tk, font, ttk
 from PIL import Image, ImageTk
 class Employee(Tk):
@@ -152,13 +153,6 @@ class Employee(Tk):
         txt_country=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
         txt_country.grid(row=1,column=5,padx=2,pady=7)
 
-        # Country
-        lbl_country=Label(upper_frame,font=("aerial",12,"bold"),text="Country:",bg="white")
-        lbl_country.grid(row=1,column=4,sticky=W,padx=2,pady=7)
-
-        txt_country=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
-        txt_country.grid(row=1,column=5,padx=2,pady=7)
-
         # CTC
         lbl_ctc=Label(upper_frame,font=("aerial",12,"bold"),text="Salary(CTC):",bg="white")
         lbl_ctc.grid(row=2,column=4,sticky=W,padx=2,pady=7)
@@ -185,6 +179,22 @@ class Employee(Tk):
         #down Frame
         down_frame=LabelFrame(Main_frame,bd=2,relief=RIDGE,bg='white', text='Employee Information Table',font=('times new roman',11,'bold'),fg='red')
         down_frame.place(x=10,y=280,width=1480,height=270)
+
+        #Search Frame
+        search_frame=LabelFrame(down_frame,bd=2,relief=RIDGE,bg='white', text='Search Employee Information',font=('times new roman',11,'bold'),fg='red')
+        search_frame.place(x=0,y=0,width=1470,height=60)
+
+        Search_By=Label(search_frame,text='Search By',font=('aerial',12,'bold'),bg='Red',fg='White')
+        Search_By.grid(row=4,column=1,padx=2,sticky=W)
+
+        # Search
+        combo_txt_searchby=ttk.Combobox(search_frame,text="Search by:",state="readonly",font=("aerial",12,"bold"),width=18)
+        combo_txt_searchby[Value]=("Select Option","Phone","ID_Proof")
+        combo_txt_searchby.concurrent(0)
+        combo_txt_searchby.grid(row=0,column=1,sticky=W,padx=5)
+
+        txt_searchby=ttk.Entry(search_frame,width=22,font=("aerial",11,"bold"))
+        txt_searchby.grid(row=0,column=2,padx=5)
         
 if __name__=="__main__":
     app = Employee()
