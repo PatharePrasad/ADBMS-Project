@@ -1,6 +1,6 @@
-
-from multiprocessing.sharedctypes import Value
-from tkinter import RIDGE, W, Button, Frame, Image, Label, LabelFrame, Tk, font, ttk
+from re import X
+from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, Tk, font, ttk
+from turtle import heading
 from PIL import Image, ImageTk
 class Employee(Tk):
     def __init__(self):
@@ -184,17 +184,72 @@ class Employee(Tk):
         search_frame=LabelFrame(down_frame,bd=2,relief=RIDGE,bg='white', text='Search Employee Information',font=('times new roman',11,'bold'),fg='red')
         search_frame.place(x=0,y=0,width=1470,height=60)
 
-        Search_By=Label(search_frame,text='Search By',font=('aerial',12,'bold'),bg='Red',fg='White')
-        Search_By.grid(row=4,column=1,padx=2,sticky=W)
+        Search_By=Label(search_frame,text='Search By:',font=('aerial',12,'bold'),bg='Red',fg='White')
+        Search_By.grid(row=0,column=0,padx=5,sticky=W)
 
         # Search
         combo_txt_searchby=ttk.Combobox(search_frame,text="Search by:",state="readonly",font=("aerial",12,"bold"),width=18)
-        combo_txt_searchby[Value]=("Select Option","Phone","ID_Proof")
-        combo_txt_searchby.concurrent(0)
+        combo_txt_searchby['value']=("Select Option","Phone","ID_Proof")
+        combo_txt_searchby.current(0)
         combo_txt_searchby.grid(row=0,column=1,sticky=W,padx=5)
 
         txt_searchby=ttk.Entry(search_frame,width=22,font=("aerial",11,"bold"))
         txt_searchby.grid(row=0,column=2,padx=5)
+
+        btn_search=Button(search_frame,text="Search",font=("aerial",11,"bold"),width=14,bg='blue',fg='white')
+        btn_search.grid(row=0,column=3,padx=5)
+
+        btn_ShowAll=Button(search_frame,text="Show All",font=("aerial",11,"bold"),width=14,bg='blue',fg='white')
+        btn_ShowAll.grid(row=0,column=4,padx=5)
+
+        # ============ Employee Table===========
+        #Table Frame
+        table_frame=Frame(down_frame,bd=3,relief=RIDGE)
+        table_frame.place(x=0,y=60,width=1470,height=170)
+
+        scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
+        scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
+
+        self.employee_table=ttk.Treeview(table_frame,column=("dep","name","degi","email","address","married","dob","doj","idproofcomb","idproof","gender","phone","country","salary",),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+
+        scroll_x.pack(side=BOTTOM,fill=X)
+        scroll_y.pack(side=RIGHT,fill=Y)
+
+        scroll_x.config(command=self.employee_table.xview)
+        scroll_y.config(command=self.employee_table.yview)
+ 
+        self.employee_table.heading("dep",text="Department")
+        self.employee_table.heading("name",text="Name")
+        self.employee_table.heading("degi",text="Deigignition")
+        self.employee_table.heading("email",text="Email")
+        self.employee_table.heading("address",text="Address")
+        self.employee_table.heading("married",text="Marrried Status")
+        self.employee_table.heading("dob",text="DOB")
+        self.employee_table.heading("doj",text="DOJ")
+        self.employee_table.heading("idproofcomb",text="ID Type")
+        self.employee_table.heading("idproof",text="ID Proof")
+        self.employee_table.heading("gender",text="Gender")
+        self.employee_table.heading("phone",text="Phone")
+        self.employee_table.heading("country",text="Country")
+        self.employee_table.heading("salary",text="Salary")
+
+        self.employee_table['show']='headings'
+        
+        self.employee_table.column("dep",width=100)
+        self.employee_table.column("name",width=100)
+        self.employee_table.column("degi",width=100)
+        self.employee_table.column("email",width=100)
+        self.employee_table.column("address",width=100)
+        self.employee_table.column("married",width=100)
+        self.employee_table.column("dob",width=100)
+        self.employee_table.column("doj",width=100)
+        self.employee_table.column("idproofcomb",width=100)
+        self.employee_table.column("idproof",width=100)
+        self.employee_table.column("gender",width=100)
+        self.employee_table.column("phone",width=100)
+        self.employee_table.column("country",width=100)
+        self.employee_table.column("salary",width=100)
+
         
 if __name__=="__main__":
     app = Employee()
