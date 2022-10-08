@@ -1,8 +1,25 @@
-from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, Tk, ttk
+from pyclbr import Function
+from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, ttk
 from PIL import Image, ImageTk
 class Employee(Tk):
     def __init__(self):
         super().__init__()
+
+        # Variables
+        self.var_dep=StringVar()
+        self.var_name=StringVar()
+        self.var_designition=StringVar()
+        self.var_email=StringVar()
+        self.var_address=StringVar()
+        self.var_married=StringVar()
+        self.var_dob=StringVar()
+        self.var_doj=StringVar()
+        self.var_idproofcomb=StringVar()
+        self.var_idproof=StringVar()
+        self.var_gender=StringVar()
+        self.var_phone=StringVar()
+        self.var_country=StringVar()
+        self.var_salary=StringVar()
         
         # Configuring the main window!
         self.title('Employee Management System')
@@ -59,48 +76,44 @@ class Employee(Tk):
         lbl_dep=Label(upper_frame,text='Department',font=('aerial',11,'bold'),bg='white')
         lbl_dep.grid(row=0,column=0,padx=2,sticky=W)
 
-        combo_dep=ttk.Combobox(upper_frame,font=('aerial',12,'bold'),width=17,state='readonly')
+        combo_dep=ttk.Combobox(upper_frame,textvariable=self.var_dep,font=('aerial',12,'bold'),width=17,state='readonly')
         combo_dep['value']=('Select Depamrtment', 'HR', 'Software Engineer', 'Manager', 'Team Leader', 'Data Scientist')
         combo_dep.current(0)
         combo_dep.grid(row=0,column=1,padx=2,pady=10,sticky=W)
-
-        lbl_dep=Label(upper_frame,text='Department',font=('aerial',11,'bold'),bg='white')
-        lbl_dep.grid(row=0,column=0,padx=2,sticky=W)
-        combo_dep=ttk.Combobox(upper_frame,font=("aerial",12,"bold"),width=17,state='readonly')
         
         #Name
         lbl_Name=Label(upper_frame,font=("aerial",12,"bold"),text="Name:",bg="white")
         lbl_Name.grid(row=0,column=2,sticky=W,padx=2,pady=7)
 
-        txt_name=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_name=ttk.Entry(upper_frame,textvariable=self.var_name,width=22,font=("aerial",11,"bold"))
         txt_name.grid(row=0,column=3,padx=2,pady=7)
 
         # lbl_Designition
         lbl_Designition=Label(upper_frame,font=("aerial",12,"bold"),text="Designition:",bg="white")
         lbl_Designition.grid(row=1,column=0,sticky=W,padx=2,pady=7)
 
-        txt_Designition=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_Designition=ttk.Entry(upper_frame,textvariable=self.var_designition,width=22,font=("aerial",11,"bold"))
         txt_Designition.grid(row=1,column=1,padx=2,pady=7)
         
         # Email
         lbl_Email=Label(upper_frame,font=("aerial",12,"bold"),text="Email:",bg="white")
         lbl_Email.grid(row=1,column=2,sticky=W,padx=2,pady=7)
 
-        txt_Email=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_Email=ttk.Entry(upper_frame,textvariable=self.var_email,width=22,font=("aerial",11,"bold"))
         txt_Email.grid(row=1,column=3,padx=2,pady=7)
 
         # Address
         lbl_address=Label(upper_frame,font=("aerial",12,"bold"),text="Address:",bg="white")
         lbl_address.grid(row=2,column=0,sticky=W,padx=2,pady=7)
 
-        txt_address=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_address=ttk.Entry(upper_frame,textvariable=self.var_address,width=22,font=("aerial",11,"bold"))
         txt_address.grid(row=2,column=1,padx=2,pady=7)
 
         # Married
         lbl_married_status=Label(upper_frame,text='Married Status',font=('aerial',12,'bold'),bg='white')
         lbl_married_status.grid(row=2,column=2,padx=2,sticky=W)
 
-        combo_txt_married=ttk.Combobox(upper_frame,font=('aerial',12,'bold'),width=18,state='readonly')
+        combo_txt_married=ttk.Combobox(upper_frame,textvariable=self.var_married,font=('aerial',12,'bold'),width=18,state='readonly')
         combo_txt_married['value']=("Married", "Unmarried")
         combo_txt_married.current(0)
         combo_txt_married.grid(row=2,column=3,padx=2,pady=7,sticky=W)
@@ -109,30 +122,30 @@ class Employee(Tk):
         lbl_dob=Label(upper_frame,font=("aerial",12,"bold"),text="DOB:",bg="white")
         lbl_dob.grid(row=3,column=0,sticky=W,padx=2,pady=7)
 
-        txt_dob=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_dob=ttk.Entry(upper_frame,textvariable=self.var_dob,width=22,font=("aerial",11,"bold"))
         txt_dob.grid(row=3,column=1,padx=2,pady=7)
 
         # DOJ
         lbl_doj=Label(upper_frame,font=("aerial",12,"bold"),text="DOJ:",bg="white")
         lbl_doj.grid(row=3,column=2,sticky=W,padx=2,pady=7)
 
-        txt_doj=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_doj=ttk.Entry(upper_frame,textvariable=self.var_doj,width=22,font=("aerial",11,"bold"))
         txt_doj.grid(row=3,column=3,padx=2,pady=7)
 
         # ID Proof
-        lbl_proof=Label(upper_frame,text='ID Proof',font=('aerial',12,'bold'),bg='white')
-        lbl_proof.grid(row=4,column=0,padx=2,sticky=W)
+        txt_proof=Label(upper_frame,textvariable=self.var_idproof,text='ID Proof',width=22,font=('aerial',12,'bold'),bg='white')
+        txt_proof.grid(row=4,column=1,padx=2,pady=7)
 
-        combo_txt_proof=ttk.Combobox(upper_frame,font=('aerial',12,'bold'),width=18,state='readonly')
-        combo_txt_proof['value']=("Select ID Proof", "PAN CARD", "AADHAR CARD", "DRIVING LICENCE")
-        combo_txt_proof.current(0)
-        combo_txt_proof.grid(row=4,column=1,padx=2,pady=7,sticky=W)
+        com_txt_proof=ttk.Combobox(upper_frame,textvariable=self.var_idproofcomb,font=('aerial',12,'bold'),width=18,state='readonly')
+        com_txt_proof['value']=("Select ID Proof", "PAN CARD", "AADHAR CARD", "DRIVING LICENCE")
+        com_txt_proof.current(0)
+        com_txt_proof.grid(row=4,column=0,padx=2,pady=7,sticky=W)
 
         # Gender
         lbl_gender=Label(upper_frame,text='Gender',font=('aerial',12,'bold'),bg='white')
         lbl_gender.grid(row=4,column=2,padx=2,sticky=W)
 
-        combo_txt_gender=ttk.Combobox(upper_frame,font=('aerial',12,'bold'),width=18,state='readonly')
+        combo_txt_gender=ttk.Combobox(upper_frame,textvariable=self.var_gender,font=('aerial',12,'bold'),width=18,state='readonly')
         combo_txt_gender['value']=("Male", "Female", "Other")
         combo_txt_gender.current(0)
         combo_txt_gender.grid(row=4,column=3,padx=2,pady=7,sticky=W)
@@ -141,21 +154,21 @@ class Employee(Tk):
         lbl_phone=Label(upper_frame,font=("aerial",12,"bold"),text="Phone:",bg="white")
         lbl_phone.grid(row=0,column=4,sticky=W,padx=2,pady=7)
 
-        txt_phone=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_phone=ttk.Entry(upper_frame,textvariable=self.var_phone,width=22,font=("aerial",11,"bold"))
         txt_phone.grid(row=0,column=5,padx=2,pady=7)
 
         # Country
         lbl_country=Label(upper_frame,font=("aerial",12,"bold"),text="Country:",bg="white")
         lbl_country.grid(row=1,column=4,sticky=W,padx=2,pady=7)
 
-        txt_country=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_country=ttk.Entry(upper_frame,textvariable=self.var_country,width=22,font=("aerial",11,"bold"))
         txt_country.grid(row=1,column=5,padx=2,pady=7)
 
         # CTC
         lbl_ctc=Label(upper_frame,font=("aerial",12,"bold"),text="Salary(CTC):",bg="white")
         lbl_ctc.grid(row=2,column=4,sticky=W,padx=2,pady=7)
 
-        txt_ctc=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
+        txt_ctc=ttk.Entry(upper_frame,textvariable=self.var_salary,width=22,font=("aerial",11,"bold"))
         txt_ctc.grid(row=2,column=5,padx=2,pady=7)
 
         #Button Frame
@@ -194,8 +207,7 @@ class Employee(Tk):
         txt_searchby=ttk.Entry(search_frame,width=22,font=("aerial",11,"bold"))
         txt_searchby.grid(row=0,column=2,padx=5)
 
-        btn_search=Button(search_frame,text="Search",font=("aerial",11,"bold")
-        ,width=14,bg='blue',fg='white')
+        btn_search=Button(search_frame,text="Search",font=("aerial",11,"bold"),width=14,bg='blue',fg='white')
         btn_search.grid(row=0,column=3,padx=5)
 
         btn_ShowAll=Button(search_frame,text="Show All",font=("aerial",11,"bold"),width=14,bg='blue',fg='white')
@@ -250,7 +262,9 @@ class Employee(Tk):
         self.employee_table.column("salary",width=100)
 
         self.employee_table.pack(fill=BOTH,expand=1)
-
+  
+   #   *********** Function Declarations*****************
+   
         
 
         
