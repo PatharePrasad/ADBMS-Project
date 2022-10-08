@@ -1,6 +1,4 @@
-from re import X
-from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, Tk, font, ttk
-from turtle import heading
+from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, Tk, ttk
 from PIL import Image, ImageTk
 class Employee(Tk):
     def __init__(self):
@@ -196,7 +194,8 @@ class Employee(Tk):
         txt_searchby=ttk.Entry(search_frame,width=22,font=("aerial",11,"bold"))
         txt_searchby.grid(row=0,column=2,padx=5)
 
-        btn_search=Button(search_frame,text="Search",font=("aerial",11,"bold"),width=14,bg='blue',fg='white')
+        btn_search=Button(search_frame,text="Search",font=("aerial",11,"bold")
+        ,width=14,bg='blue',fg='white')
         btn_search.grid(row=0,column=3,padx=5)
 
         btn_ShowAll=Button(search_frame,text="Show All",font=("aerial",11,"bold"),width=14,bg='blue',fg='white')
@@ -212,7 +211,7 @@ class Employee(Tk):
 
         self.employee_table=ttk.Treeview(table_frame,column=("dep","name","degi","email","address","married","dob","doj","idproofcomb","idproof","gender","phone","country","salary",),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
 
-        scroll_x.pack(side=BOTTOM,fill=X)
+        scroll_x.pack(side=BOTTOM,fill=None)
         scroll_y.pack(side=RIGHT,fill=Y)
 
         scroll_x.config(command=self.employee_table.xview)
@@ -249,6 +248,10 @@ class Employee(Tk):
         self.employee_table.column("phone",width=100)
         self.employee_table.column("country",width=100)
         self.employee_table.column("salary",width=100)
+
+        self.employee_table.pack(fill=BOTH,expand=1)
+
+        
 
         
 if __name__=="__main__":
