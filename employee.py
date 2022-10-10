@@ -1,6 +1,9 @@
-from pyclbr import Function
-from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, ttk
+from glob import escape
+from sqlite3 import connect
+from tkinter import BOTH, BOTTOM, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, messagebox, ttk
 from PIL import Image, ImageTk
+import _mysql_connector
+from tkinter import messagebox
 class Employee(Tk):
     def __init__(self):
         super().__init__()
@@ -265,7 +268,38 @@ class Employee(Tk):
   
    #   *********** Function Declarations*****************
    
-        
+    def add_data(self):
+        if self.var_dep.get()=="" or self.var_email.get()=="":
+            messagebox.showerror('Error','All Fields are required')
+        else:
+            try:
+                conn=_mysql_connector.connect(host='localhost',username='root',password='12345678',database='mydata')
+                my_cursor=conn.cursor()
+                my_cursor.execute('insert into employee values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(
+        self.var_dep.get(),
+        self.var_name.get(),
+        self.var_designition.get(),
+        self.var_email.get(),
+        self.var_address.get(),
+        self.var_married.get(),
+        self.var_dob.get(),
+        self.var_doj.get(),
+        self.var_idproofcomb.get(),
+        self.var_idproof.get(),
+        self.var_gender.get(),
+        self.var_phone.get(),
+        self.var_country.get(),
+        self.var_salary.get(),
+
+
+                    
+                                                                                                                ))
+connect.commit()
+connect.close()
+messagebox.showinfo('success','Employee has been added!',parent=self)
+except Exception as escape:
+messagebox.showerror('Error',f'Due To:{str(escape)}',parent=self)     
+
 
         
 if __name__=="__main__":
