@@ -276,29 +276,30 @@ class Employee(Tk):
                 conn=_mysql_connector.connect(host='localhost',username='root',password='12345678',database='mydata')
                 my_cursor=conn.cursor()
                 my_cursor.execute('insert into employee values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(
-        self.var_dep.get(),
-        self.var_name.get(),
-        self.var_designition.get(),
-        self.var_email.get(),
-        self.var_address.get(),
-        self.var_married.get(),
-        self.var_dob.get(),
-        self.var_doj.get(),
-        self.var_idproofcomb.get(),
-        self.var_idproof.get(),
-        self.var_gender.get(),
-        self.var_phone.get(),
-        self.var_country.get(),
-        self.var_salary.get(),
+                                                                                                             self.var_dep.get(),
+                                                                                                             self.var_name.get(),
+                                                                                                             self.var_designition.get(),
+                                                                                                             self.var_email.get(),
+                                                                                                             self.var_address.get(),
+                                                                                                             self.var_married.get(),
+                                                                                                             self.var_dob.get(),
+                                                                                                             self.var_doj.get(),
+                                                                                                             self.var_idproofcomb.get(),
+                                                                                                             self.var_idproof.get(),
+                                                                                                             self.var_gender.get(),
+                                                                                                             self.var_phone.get(),
+                                                                                                             self.var_country.get(),
+                                                                                                             self.var_salary.get(),
+        
 
 
                     
-                                                                                                                ))
-connect.commit()
-connect.close()
-messagebox.showinfo('success','Employee has been added!',parent=self)
-except Exception as escape:
-messagebox.showerror('Error',f'Due To:{str(escape)}',parent=self)     
+                                                                                                                                          ))
+                connect.commit()
+                connect.close() 
+                messagebox.showinfo('success','Employee has been added!',parent=self.root)
+            except Exception as es:
+                messagebox.showerror('Error',f'Due To:{str(es)}',parent=self.root)     
 
 
         
