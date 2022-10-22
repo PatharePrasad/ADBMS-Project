@@ -281,6 +281,7 @@ class Employee(Tk):
             try:
                 conn=mysql.connector.connect(host='localhost',username='root',password='12345678',database='empdata')
                 my_cursor=conn.cursor()
+                print(self.var_idproof.get())
                 my_cursor.execute('insert into employee values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(
                                                                                                              self.var_dep.get(),
                                                                                                              self.var_name.get(),
@@ -326,7 +327,7 @@ class Employee(Tk):
     def get_cursor(self):
         cursor_row=self.employee_table.focus()
         content=self.employee_table.item(cursor_row)
-        data=content['values']
+        data=content['value']
 
         self.var_dep.set(data[0])
         self.var_name.set(data[1])
@@ -382,7 +383,7 @@ class Employee(Tk):
 
     # Delete
     def delete_data(self):
-        if self.var_idproof.get()=="":
+        if self.var_idproof.get()=='':
             messagebox.showerror('Error','All fields are required')
         else:
             try:
