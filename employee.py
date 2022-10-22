@@ -1,8 +1,11 @@
 from tkinter import BOTH, BOTTOM, END, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, messagebox, ttk
 from PIL import Image, ImageTk
 import mysql.connector
+from dotenv import dotenv_values
 from tkinter import messagebox
 class Employee(Tk):
+    config = dotenv_values(".env")
+
     def __init__(self):
         super().__init__()
 
@@ -133,17 +136,17 @@ class Employee(Tk):
         txt_doj=ttk.Entry(upper_frame,textvariable=self.var_doj,width=22,font=("aerial",11,"bold"))
         txt_doj.grid(row=3,column=3,padx=2,pady=7)
 
+        self.com_txt_proof=ttk.Combobox(upper_frame,textvariable=self.var_idproofcomb,font=('aerial',12,'bold'),width=18,state='readonly')
+        self.com_txt_proof['value']=("Select ID Proof", "PAN CARD", "AADHAR CARD", "DRIVING LICENCE")
+        self.com_txt_proof.current(0)
+        self.com_txt_proof.grid(row=4,column=0,padx=2,pady=7,sticky=W)
+
         # ID Proof
-        txt_proof=Label(upper_frame,textvariable=self.var_idproof,text='ID Proof',width=22,font=('aerial',12,'bold'),bg='white')
-        txt_proof.grid(row=4,column=1,padx=2,pady=7)
+        self.txt_proof=Label(upper_frame,textvariable=self.var_idproof,text='ID Proof',width=22,font=('aerial',12,'bold'),bg='white')
+        self.txt_proof.grid(row=4,column=1,padx=2,pady=7)
 
-        com_txt_proof=ttk.Combobox(upper_frame,textvariable=self.var_idproofcomb,font=('aerial',12,'bold'),width=18,state='readonly')
-        com_txt_proof['value']=("Select ID Proof", "PAN CARD", "AADHAR CARD", "DRIVING LICENCE")
-        com_txt_proof.current(0)
-        com_txt_proof.grid(row=4,column=0,padx=2,pady=7,sticky=W)
-
-        txt_proof=ttk.Entry(upper_frame,width=22,font=("aerial",11,"bold"))
-        txt_proof.grid(row=4,column=1,padx=2,pady=7)
+        self.txt_proof=ttk.Entry(upper_frame,textvariable=self.var_idproof, width=22,font=("aerial",11,"bold"))
+        self.txt_proof.grid(row=4,column=1,padx=2,pady=7)
 
         # Gender
         lbl_gender=Label(upper_frame,text='Gender',font=('aerial',12,'bold'),bg='white')
@@ -154,7 +157,7 @@ class Employee(Tk):
         combo_txt_gender.current(0)
         combo_txt_gender.grid(row=4,column=3,padx=2,pady=7,sticky=W)
 
-         # Phone
+        # Phone
         lbl_phone=Label(upper_frame,font=("aerial",12,"bold"),text="Phone:",bg="white")
         lbl_phone.grid(row=0,column=4,sticky=W,padx=2,pady=7)
 
@@ -181,7 +184,7 @@ class Employee(Tk):
 
         btn_add=Button(button_frame,text="Save",command=self.add_data,font=("aerial",15,"bold"),width=13,bg='blue',fg='white')
         btn_add.grid(row=0,column=0,padx=1,pady=5)
- 
+
         btn_update=Button(button_frame,text="Update",command=self.update_data,font=("aerial",15,"bold"),width=13,bg='blue',fg='white')
         btn_update.grid(row=1,column=0,padx=1,pady=5)
 
@@ -233,7 +236,7 @@ class Employee(Tk):
 
         scroll_x.config(command=self.employee_table.xview)
         scroll_y.config(command=self.employee_table.yview)
- 
+
         self.employee_table.heading("dep",text="Department")
         self.employee_table.heading("name",text="Name")
         self.employee_table.heading("degi",text="Deigignition")
@@ -271,47 +274,44 @@ class Employee(Tk):
 
         self.fetch_data()
 
-  
-   #   *********** Function Declarations*****************
-   
+    #   *********** Function Declarations*****************
     def add_data(self):
         if self.var_dep.get()=="" or self.var_email.get()=="":
             messagebox.showerror('Error','All Fields are required')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost',username='root',password='12345678',database='empdata')
+                conn=self.cursor()
+                statement = f"""
+                INSERT INTO employee 
+                (Department, Name, Designition, Email, Address, Married_status, DOB, DOJ, id_proof_type, id_proof, Gender, Phone, Country, Salary)
+                VALUES (
+                    '{self.var_dep.get()}',
+                    '{self.var_name.get()}',
+                    '{self.var_designition.get()}',
+                    '{self.var_email.get()}',
+                    '{self.var_address.get()}',
+                    '{self.var_married.get()}',
+                    '{self.var_dob.get()}',
+                    '{self.var_doj.get()}',
+                    '{self.var_idproofcomb.get()}',
+                    '{self.var_idproof.get()}',
+                    '{self.var_gender.get()}',                                                                                              
+                    '{self.var_phone.get()}',
+                    '{self.var_country.get()}',
+                    '{self.var_salary.get()}'
+                );"""
                 my_cursor=conn.cursor()
-                print(self.var_idproof.get())
-                my_cursor.execute('insert into employee values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(
-                                                                                                             self.var_dep.get(),
-                                                                                                             self.var_name.get(),
-                                                                                                             self.var_designition.get(),
-                                                                                                             self.var_email.get(),
-                                                                                                             self.var_address.get(),
-                                                                                                             self.var_married.get(),
-                                                                                                             self.var_dob.get(),
-                                                                                                             self.var_doj.get(),
-                                                                                                             self.var_idproofcomb.get(),
-                                                                                                             self.var_idproof.get(),
-                                                                                                             self.var_gender.get(),
-                                                                                                             self.var_phone.get(),
-                                                                                                             self.var_country.get(),
-                                                                                                             self.var_salary.get(),
-        
-
-
-                    
-                                                                                                                                          ))
+                my_cursor.execute(statement)
                 conn.commit()
                 self.fetch_data()
                 conn.close() 
-                messagebox.showinfo('success','Employee has been added!',parent=self.root)
+                messagebox.showinfo('success','Employee has been added!')
             except Exception as es:
-                messagebox.showerror('Error',f'Due To:{str(es)}',parent=self.root)     
+                messagebox.showerror('Error',f'Due To:{str(es)}')     
 
     # fetch data
     def fetch_data(self):
-        conn=mysql.connector.connect(host='localhost',username='root',password='12345678',database='empdata')
+        conn=self.cursor()
         my_cursor=conn.cursor()
         my_cursor.execute('select * from employee')
         data=my_cursor.fetchall()
@@ -324,7 +324,7 @@ class Employee(Tk):
 
     # Get cursor
 
-    def get_cursor(self):
+    def get_cursor(self, event):
         cursor_row=self.employee_table.focus()
         content=self.employee_table.item(cursor_row)
         data=content['value']
@@ -338,7 +338,9 @@ class Employee(Tk):
         self.var_dob.set(data[6])
         self.var_doj.set(data[7])
         self.var_idproofcomb.set(data[8])
+        self.com_txt_proof.config(state= "disabled")
         self.var_idproof.set(data[9])
+        self.txt_proof.config(state= "disabled")
         self.var_gender.set(data[10])
         self.var_phone.set(data[11])
         self.var_country.set(data[12])
@@ -348,38 +350,38 @@ class Employee(Tk):
         if self.var_dep.get()=="" or self.var_email.get()=="":
             messagebox.showerror('Error','All Fields are required')
         else:
-           try:
+            try:
                 update=messagebox.askyesno('Update','Are you sure update this employee')
                 if update>0:
-                   conn=mysql.connector.connect(host='localhost',username='root',password='12345678',database='empdata')
-                   my_cursor=conn.cursor()
-                   my_cursor.execute('update employee set Department=%s,Name=%s,Designition=%s,Email=%s,Address=%s,Married_status=%s,DOB=%s,DOJ=%s,id_proof_type=%s,Country=%s,Salary=%s where id_proof=%s',(
-                                                                                                             self.var_dep.get(),
-                                                                                                             self.var_name.get(),
-                                                                                                             self.var_designition.get(),
-                                                                                                             self.var_email.get(),
-                                                                                                             self.var_address.get(),
-                                                                                                             self.var_married.get(),
-                                                                                                             self.var_dob.get(),
-                                                                                                             self.var_doj.get(),
-                                                                                                             self.var_idproofcomb.get(),
-                                                                                                    
-                                                                                                             self.var_gender.get(),
-                                                                                                             self.var_phone.get(),
-                                                                                                             self.var_country.get(),
-                                                                                                             self.var_salary.get(),
-                                                                                                             self.var_idproof.get()
-
-                                                                                                                                                                                                         ))
+                    conn=self.cursor()
+                    statement = f"""
+                    UPDATE employee
+                    SET
+                    Department='{self.var_dep.get()}', 
+                    Name='{self.var_name.get()}',
+                    Designition='{self.var_designition.get()}',
+                    Email='{self.var_email.get()}',
+                    Address='{self.var_address.get()}',
+                    Married_status='{self.var_married.get()}',
+                    DOB='{self.var_dob.get()}',
+                    DOJ='{self.var_doj.get()}',
+                    Gender='{self.var_gender.get()}',
+                    Phone='{self.var_phone.get()}',
+                    Country='{self.var_country.get()}',
+                    Salary='{self.var_salary.get()}'
+                    WHERE id_proof='{self.var_idproof.get()}'
+                    ;"""
+                    my_cursor=conn.cursor()
+                    my_cursor.execute(statement)
                 else:
                     if not update:
-                       return
+                        return
                 conn.commit()
                 self.fetch_data()
                 conn.close()
-                messagebox.showinfo('success','Employee Successfully Updated',parent=self.root)
-           except Exception as es:
-                messagebox.showerror('Error',f'Due To:{str(es)}',parent=self.root)
+                messagebox.showinfo('success','Employee Successfully Updated')
+            except Exception as es:
+                messagebox.showerror('Error',f'Due To:{str(es)}')
 
     # Delete
     def delete_data(self):
@@ -387,22 +389,21 @@ class Employee(Tk):
             messagebox.showerror('Error','All fields are required')
         else:
             try:
-                Delete=messagebox.askyesno('Delete','Are you sure delete this employee',parent=self.root)
+                Delete=messagebox.askyesno('Delete','Are you sure delete this employee')
                 if Delete>0:
-                    conn=mysql.connector.connect(host='localhost',username='root',password='12345678',database='empdata')
+                    conn=self.cursor()
+                    statement=f"DELETE FROM employee WHERE id_proof='{self.var_idproof.get()}';"
                     my_cursor=conn.cursor()
-                    sql='delete from employee where id_proof=%s'
-                    value=(self.var_idproof.get(),)
-                    my_cursor.execute(sql,value)
+                    my_cursor.execute(statement)
                 else:
                     if not Delete:
                         return
                 conn.commit()
                 self.fetch_data()
                 conn.close()
-                messagebox.showinfo('Delete','Employee Successfully Deleted',parent=self.root)
+                messagebox.showinfo('Delete','Employee Successfully Deleted')
             except Exception as es:
-                messagebox.showerror('Error',f'Due To:{str(es)}',parent=self.root)
+                messagebox.showerror('Error',f'Due To:{str(es)}')
 
     # reset 
 
@@ -429,7 +430,7 @@ class Employee(Tk):
             messagebox.showerror('Error','Please select option')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost',username='root',password='12345678',database='empdata')
+                conn=self.cursor()
                 my_cursor=conn.cursor()
                 my_cursor.execute('select * from employee where '  +str(self.var_com_search.get())+" LIKE '%"+str(self.var_search.get()+"%'"))
                 rows=my_cursor.fetchall()
@@ -440,13 +441,16 @@ class Employee(Tk):
                     conn.commit()
                     conn.close()
             except Exception as es:
-                messagebox.showerror('Error',f'Due To:{str(es)}',parent=self.root)
+                messagebox.showerror('Error',f'Due To:{str(es)}')
 
+    def cursor(self):
+        return mysql.connector.connect(host=self.config['DB_HOST'],username=self.config['DB_USERNAME'],password=self.config['DB_PASSWORD'],database=self.config['DB_NAME'])
+    
 
 
 
 
 if __name__=="__main__":
- app = Employee()
-app.mainloop()
+    app = Employee()
+    app.mainloop()
     
