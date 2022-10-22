@@ -18,6 +18,6 @@ Steps:
 
 - Get back to parent directory and run
 
-    ```pip install pillow```
+    ```pip install -r requirements.txt```
 
 - Now try running code.👍👍👍
