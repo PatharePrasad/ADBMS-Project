@@ -327,7 +327,7 @@ class Employee(Tk):
     def get_cursor(self, event):
         cursor_row=self.employee_table.focus()
         content=self.employee_table.item(cursor_row)
-        data=content['value']
+        data=content['values']
 
         self.var_dep.set(data[0])
         self.var_name.set(data[1])
@@ -338,9 +338,9 @@ class Employee(Tk):
         self.var_dob.set(data[6])
         self.var_doj.set(data[7])
         self.var_idproofcomb.set(data[8])
-        self.com_txt_proof.config(state= "disabled")
+        # self.com_txt_proof.config(state= "disabled")
         self.var_idproof.set(data[9])
-        self.txt_proof.config(state= "disabled")
+        # self.txt_proof.config(state= "disabled")
         self.var_gender.set(data[10])
         self.var_phone.set(data[11])
         self.var_country.set(data[12])
