@@ -208,7 +208,7 @@ class Employee(Tk):
         # Search
         self.var_com_search=StringVar()
         combo_txt_searchby=ttk.Combobox(search_frame,textvariable=self.var_com_search,text="Search by:",state="readonly",font=("aerial",12,"bold"),width=18)
-        combo_txt_searchby['value']=("Select Option","Phone","ID_Proof")
+        combo_txt_searchby['value']=("Select Option","Phone","id_Proof")
         combo_txt_searchby.current(0)
         combo_txt_searchby.grid(row=0,column=1,sticky=W,padx=5)
         self.var_search=StringVar()
@@ -239,7 +239,7 @@ class Employee(Tk):
 
         self.employee_table.heading("dep",text="Department")
         self.employee_table.heading("name",text="Name")
-        self.employee_table.heading("degi",text="Deigignition")
+        self.employee_table.heading("degi",text="Designition")
         self.employee_table.heading("email",text="Email")
         self.employee_table.heading("address",text="Address")
         self.employee_table.heading("married",text="Marrried Status")
