@@ -1,4 +1,4 @@
-from tkinter import BOTH, BOTTOM, END, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, messagebox, ttk
+from tkinter import BOTH, BOTTOM, END, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, X,Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, messagebox, ttk
 from PIL import Image, ImageTk
 import mysql.connector
 from dotenv import dotenv_values
@@ -231,7 +231,7 @@ class Employee(Tk):
 
         self.employee_table=ttk.Treeview(table_frame,column=("dep","name","degi","email","address","married","dob","doj","idproofcomb","idproof","gender","phone","country","salary",),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
 
-        scroll_x.pack(side=BOTTOM,fill=None)
+        scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
 
         scroll_x.config(command=self.employee_table.xview)
