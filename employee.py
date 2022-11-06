@@ -207,7 +207,7 @@ class Employee(Tk):
 
         # Search
         self.var_com_search=StringVar()
-        combo_txt_searchby=ttk.Combobox(search_frame,textvariable=self.var_com_search,text="Search by:",state="readonly",font=("aerial",12,"bold"),width=18)
+        combo_txt_searchby=ttk.Combobox(search_frame,textvariable=self.var_com_search,state="readonly",font=("aerial",12,"bold"),width=18)
         combo_txt_searchby['value']=("Select Option","Phone","id_Proof")
         combo_txt_searchby.current(0)
         combo_txt_searchby.grid(row=0,column=1,sticky=W,padx=5)
@@ -440,6 +440,8 @@ class Employee(Tk):
                         self.employee_table.insert("",END,values=i)
                     conn.commit()
                     conn.close()
+                else:
+                    messagebox.showerror('404','Record not found!')
             except Exception as es:
                 messagebox.showerror('Error',f'Due To:{str(es)}')
 
