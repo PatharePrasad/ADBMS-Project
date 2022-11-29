@@ -1,8 +1,12 @@
-from tkinter import BOTH, BOTTOM, END, HORIZONTAL, RIDGE, RIGHT, VERTICAL, W, X,Y, Button, Frame, Image, Label, LabelFrame, StringVar, Tk, messagebox, ttk
-from PIL import Image, ImageTk
+from tkinter import (BOTH, BOTTOM, END, HORIZONTAL, NO, RIDGE, RIGHT, VERTICAL,
+                     Button, Frame, Image, Label, LabelFrame, StringVar, Tk, W,
+                     X, Y, messagebox, ttk)
+
 import mysql.connector
 from dotenv import dotenv_values
-from tkinter import messagebox
+from PIL import Image, ImageTk
+
+
 class Employee(Tk):
     config = dotenv_values(".env")
 
@@ -208,7 +212,7 @@ class Employee(Tk):
         # Search
         self.var_com_search=StringVar()
         combo_txt_searchby=ttk.Combobox(search_frame,textvariable=self.var_com_search,state="readonly",font=("aerial",12,"bold"),width=18)
-        combo_txt_searchby['value']=("Select Option","Phone","id_Proof")
+        combo_txt_searchby['value']=("Select Option","Phone","ID_Proof")
         combo_txt_searchby.current(0)
         combo_txt_searchby.grid(row=0,column=1,sticky=W,padx=5)
         self.var_search=StringVar()
@@ -237,6 +241,7 @@ class Employee(Tk):
         scroll_x.config(command=self.employee_table.xview)
         scroll_y.config(command=self.employee_table.yview)
 
+
         self.employee_table.heading("dep",text="Department")
         self.employee_table.heading("name",text="Name")
         self.employee_table.heading("degi",text="Designition")
@@ -256,9 +261,9 @@ class Employee(Tk):
         
         self.employee_table.column("dep",width=100)
         self.employee_table.column("name",width=100)
-        self.employee_table.column("degi",width=100)
-        self.employee_table.column("email",width=100)
-        self.employee_table.column("address",width=100)
+        self.employee_table.column("degi",width=80)
+        self.employee_table.column("email",width=130)
+        self.employee_table.column("address",width=80)
         self.employee_table.column("married",width=100)
         self.employee_table.column("dob",width=100)
         self.employee_table.column("doj",width=100)
